@@ -7,13 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		020C7160E84E684802F13C11 /* OllamaRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8020635BAAA6EB8AA2C187BA /* OllamaRunner.swift */; };
 		09C1ECDD1D2ACF19DC228C32 /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EDF74CFB52AF103578E652 /* ConnectView.swift */; };
 		0E19CE58067EB96AB418CA9C /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53963D1FFC85EDB7FB0C7B80 /* AppModel.swift */; };
-		15F9ACEF77302709DDE3EAFF /* AppleIntelligenceCategorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFB07812FBD20BC42872C47 /* AppleIntelligenceCategorizer.swift */; };
+		196B1FFE583FE5E12E329218 /* PlayerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29854A77703A9724D3D36273 /* PlayerBar.swift */; };
+		1A06159280E76B1E7475CF6B /* PlaylistDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691A3016434B2C8311DBC424 /* PlaylistDetailView.swift */; };
 		1B0F942FEB9A3A0E82B3515F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE204BBB29A426CE01E42EB9 /* SettingsView.swift */; };
 		1F5FB135D808FA276DDCB9D8 /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DAF4E7D8994992B8BD421D /* Exporter.swift */; };
 		2068E29451F82E8DD5AFA620 /* PrismTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F020D16EC09F9C2017682 /* PrismTheme.swift */; };
 		208E109E2EF75AA208AF2176 /* PrismApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B8078AD319F7386EE02C62 /* PrismApp.swift */; };
+		34F115F3420C81A15CF56446 /* OllamaClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7908F100E9CA3350AC565DB3 /* OllamaClient.swift */; };
+		40303AAA72C2956B51F31038 /* AppleIntelligenceRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A43A25EF3C17CB1296207A /* AppleIntelligenceRunner.swift */; };
+		42CF7AD984359E6B57B1DB74 /* LikedSongsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4A1209618E57C3F172C508 /* LikedSongsView.swift */; };
 		56D251D45DE04D29A2EA522A /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3A72D801E642CC94FADFD /* SidebarView.swift */; };
 		6A862818C00C334244A6201A /* LibraryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57408DEA5B078B18CC43B8E7 /* LibraryModels.swift */; };
 		74B3E2DD3510B49D4F4A0611 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 797614D7F2C2EB4869DFFE9C /* Assets.xcassets */; };
@@ -21,6 +26,7 @@
 		82216FB3953D68779ADF8357 /* SpotifyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A51534F0E6D6DB9AEB2D46 /* SpotifyModels.swift */; };
 		82A2C86FE0C3287BCD89894F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE5234E3DE522DA09B70D39 /* Extensions.swift */; };
 		8CD881F22946AAA45C6A9B49 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5686DE671DA2DD3D3A5F27 /* Keychain.swift */; };
+		8DC782247A008EE7B20214C0 /* WebPlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2127792CF95AF377691F06E6 /* WebPlaybackController.swift */; };
 		9C4439726CC804BDCF841B47 /* CategoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C2D309A671F6615C2E6640 /* CategoryDetailView.swift */; };
 		A0723FA54AECC3E6903F0ABE /* Categorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84B37BB72A68D4EE1FE8FD2 /* Categorizer.swift */; };
 		A421948F7525DF2944B8503C /* LibraryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC7BC9CBD54A83C01B9A459 /* LibraryStore.swift */; };
@@ -28,23 +34,27 @@
 		E6AB8CEA5B4B9305E0385748 /* SpotifyAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABB2675D0EA1039ADD84398 /* SpotifyAuth.swift */; };
 		EACC7594B6E83FCD8CF1FDAA /* LoopbackServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C19D83F46CEDA98A480C12 /* LoopbackServer.swift */; };
 		EF9AA727ED75F5BF18543E61 /* SpotifyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96C32F34753CEC0DFAAC99B /* SpotifyClient.swift */; };
-		F533BAF9EDA889BD03FF398F /* RuleBasedCategorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202E94D2EB6614BF43616C36 /* RuleBasedCategorizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		03DAF4E7D8994992B8BD421D /* Exporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
-		202E94D2EB6614BF43616C36 /* RuleBasedCategorizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleBasedCategorizer.swift; sourceTree = "<group>"; };
+		20A43A25EF3C17CB1296207A /* AppleIntelligenceRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleIntelligenceRunner.swift; sourceTree = "<group>"; };
+		2127792CF95AF377691F06E6 /* WebPlaybackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPlaybackController.swift; sourceTree = "<group>"; };
 		252C661D418B9BABEE39F94D /* project.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = project.yml; sourceTree = "<group>"; };
 		26B8078AD319F7386EE02C62 /* PrismApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismApp.swift; sourceTree = "<group>"; };
-		2FFB07812FBD20BC42872C47 /* AppleIntelligenceCategorizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleIntelligenceCategorizer.swift; sourceTree = "<group>"; };
+		29854A77703A9724D3D36273 /* PlayerBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerBar.swift; sourceTree = "<group>"; };
 		3CBECDC40DB2F7D8BF88B956 /* Prism.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prism.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40C19D83F46CEDA98A480C12 /* LoopbackServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopbackServer.swift; sourceTree = "<group>"; };
 		4ABB2675D0EA1039ADD84398 /* SpotifyAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuth.swift; sourceTree = "<group>"; };
 		53963D1FFC85EDB7FB0C7B80 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		57408DEA5B078B18CC43B8E7 /* LibraryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryModels.swift; sourceTree = "<group>"; };
 		5A5686DE671DA2DD3D3A5F27 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		691A3016434B2C8311DBC424 /* PlaylistDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailView.swift; sourceTree = "<group>"; };
+		7908F100E9CA3350AC565DB3 /* OllamaClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OllamaClient.swift; sourceTree = "<group>"; };
 		797614D7F2C2EB4869DFFE9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8020635BAAA6EB8AA2C187BA /* OllamaRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OllamaRunner.swift; sourceTree = "<group>"; };
 		94A51534F0E6D6DB9AEB2D46 /* SpotifyModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyModels.swift; sourceTree = "<group>"; };
+		9B4A1209618E57C3F172C508 /* LikedSongsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedSongsView.swift; sourceTree = "<group>"; };
 		9EE5234E3DE522DA09B70D39 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9F58B8466004B36C8015006A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A5F3A72D801E642CC94FADFD /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
@@ -77,8 +87,10 @@
 				5A5686DE671DA2DD3D3A5F27 /* Keychain.swift */,
 				BEC7BC9CBD54A83C01B9A459 /* LibraryStore.swift */,
 				40C19D83F46CEDA98A480C12 /* LoopbackServer.swift */,
+				7908F100E9CA3350AC565DB3 /* OllamaClient.swift */,
 				4ABB2675D0EA1039ADD84398 /* SpotifyAuth.swift */,
 				C96C32F34753CEC0DFAAC99B /* SpotifyClient.swift */,
+				2127792CF95AF377691F06E6 /* WebPlaybackController.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -102,9 +114,9 @@
 		6EC02F4BC21860D90CBF3ADF /* Categorization */ = {
 			isa = PBXGroup;
 			children = (
-				2FFB07812FBD20BC42872C47 /* AppleIntelligenceCategorizer.swift */,
+				20A43A25EF3C17CB1296207A /* AppleIntelligenceRunner.swift */,
 				D84B37BB72A68D4EE1FE8FD2 /* Categorizer.swift */,
-				202E94D2EB6614BF43616C36 /* RuleBasedCategorizer.swift */,
+				8020635BAAA6EB8AA2C187BA /* OllamaRunner.swift */,
 			);
 			path = Categorization;
 			sourceTree = "<group>";
@@ -147,6 +159,9 @@
 				C4C2D309A671F6615C2E6640 /* CategoryDetailView.swift */,
 				C7EDF74CFB52AF103578E652 /* ConnectView.swift */,
 				9F58B8466004B36C8015006A /* ContentView.swift */,
+				9B4A1209618E57C3F172C508 /* LikedSongsView.swift */,
+				29854A77703A9724D3D36273 /* PlayerBar.swift */,
+				691A3016434B2C8311DBC424 /* PlaylistDetailView.swift */,
 				F31F020D16EC09F9C2017682 /* PrismTheme.swift */,
 				AE204BBB29A426CE01E42EB9 /* SettingsView.swift */,
 				A5F3A72D801E642CC94FADFD /* SidebarView.swift */,
@@ -226,7 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E19CE58067EB96AB418CA9C /* AppModel.swift in Sources */,
-				15F9ACEF77302709DDE3EAFF /* AppleIntelligenceCategorizer.swift in Sources */,
+				40303AAA72C2956B51F31038 /* AppleIntelligenceRunner.swift in Sources */,
 				A0723FA54AECC3E6903F0ABE /* Categorizer.swift in Sources */,
 				9C4439726CC804BDCF841B47 /* CategoryDetailView.swift in Sources */,
 				09C1ECDD1D2ACF19DC228C32 /* ConnectView.swift in Sources */,
@@ -236,16 +251,21 @@
 				8CD881F22946AAA45C6A9B49 /* Keychain.swift in Sources */,
 				6A862818C00C334244A6201A /* LibraryModels.swift in Sources */,
 				A421948F7525DF2944B8503C /* LibraryStore.swift in Sources */,
+				42CF7AD984359E6B57B1DB74 /* LikedSongsView.swift in Sources */,
 				EACC7594B6E83FCD8CF1FDAA /* LoopbackServer.swift in Sources */,
+				34F115F3420C81A15CF56446 /* OllamaClient.swift in Sources */,
+				020C7160E84E684802F13C11 /* OllamaRunner.swift in Sources */,
+				196B1FFE583FE5E12E329218 /* PlayerBar.swift in Sources */,
+				1A06159280E76B1E7475CF6B /* PlaylistDetailView.swift in Sources */,
 				208E109E2EF75AA208AF2176 /* PrismApp.swift in Sources */,
 				2068E29451F82E8DD5AFA620 /* PrismTheme.swift in Sources */,
-				F533BAF9EDA889BD03FF398F /* RuleBasedCategorizer.swift in Sources */,
 				1B0F942FEB9A3A0E82B3515F /* SettingsView.swift in Sources */,
 				56D251D45DE04D29A2EA522A /* SidebarView.swift in Sources */,
 				E6AB8CEA5B4B9305E0385748 /* SpotifyAuth.swift in Sources */,
 				EF9AA727ED75F5BF18543E61 /* SpotifyClient.swift in Sources */,
 				82216FB3953D68779ADF8357 /* SpotifyModels.swift in Sources */,
 				776381A8FA528850458D9F29 /* TrackRowView.swift in Sources */,
+				8DC782247A008EE7B20214C0 /* WebPlaybackController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

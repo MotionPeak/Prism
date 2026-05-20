@@ -16,13 +16,13 @@ final class AppModel {
 
     enum Engine: String, CaseIterable, Identifiable {
         case appleIntelligence
-        case ruleBased
+        case ollama
 
         var id: String { rawValue }
         var label: String {
             switch self {
             case .appleIntelligence: return "Apple Intelligence (on-device)"
-            case .ruleBased: return "Genre Rules"
+            case .ollama: return "Local Model (Ollama)"
             }
         }
     }
@@ -43,6 +43,13 @@ final class AppModel {
     var selectedCategoryID: String?
     var searchText = ""
 
+    // Sentinel sidebar selection that opens the Liked Songs management view.
+    static let likedSongsID = "__prism_liked_songs__"
+
+    // Sidebar playlist selections are tagged "<prefix><playlistID>".
+    static let playlistTagPrefix = "__prism_playlist__"
+    static func playlistTag(_ playlistID: String) -> String { playlistTagPrefix + playlistID }
+
     var isWorking = false
     var statusMessage = ""
     var progress = 0.0
@@ -52,8 +59,13 @@ final class AppModel {
     var engine: Engine = .appleIntelligence {
         didSet { UserDefaults.standard.set(engine.rawValue, forKey: Self.engineKey) }
     }
+    var ollamaModel = "" {
+        didSet { UserDefaults.standard.set(ollamaModel, forKey: Self.ollamaModelKey) }
+    }
+    var availableOllamaModels: [String] = []
 
     private static let engineKey = "categorizationEngine"
+    private static let ollamaModelKey = "ollamaModel"
 
     init() {
         clientIDDraft = SpotifyAuth.shared.clientID
@@ -61,6 +73,7 @@ final class AppModel {
            let restored = Engine(rawValue: stored) {
             engine = restored
         }
+        ollamaModel = UserDefaults.standard.string(forKey: Self.ollamaModelKey) ?? ""
         if let cached = LibraryStore.load() {
             library = cached
         }
@@ -82,6 +95,27 @@ final class AppModel {
 
     func filteredTracks(in category: Category) -> [LibraryTrack] {
         let all = tracks(in: category)
+        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        guard !query.isEmpty else { return all }
+        return all.filter { track in
+            track.name.lowercased().contains(query)
+                || track.displayArtist.lowercased().contains(query)
+                || track.albumName.lowercased().contains(query)
+        }
+    }
+
+    var selectedPlaylist: StoredPlaylist? {
+        guard let id = selectedCategoryID, id.hasPrefix(Self.playlistTagPrefix) else { return nil }
+        let playlistID = String(id.dropFirst(Self.playlistTagPrefix.count))
+        return library.playlists.first { $0.id == playlistID }
+    }
+
+    func tracks(inPlaylist playlist: StoredPlaylist) -> [LibraryTrack] {
+        playlist.trackIDs.compactMap { tracksByID[$0] }
+    }
+
+    func filteredTracks(inPlaylist playlist: StoredPlaylist) -> [LibraryTrack] {
+        let all = tracks(inPlaylist: playlist)
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         guard !query.isEmpty else { return all }
         return all.filter { track in
@@ -134,6 +168,11 @@ final class AppModel {
         }
     }
 
+    func reconnect() async {
+        SpotifyAuth.shared.signOut()
+        await connect()
+    }
+
     func refreshEverything() async {
         await sync()
         if hasLibrary {
@@ -173,40 +212,165 @@ final class AppModel {
         progress = 0
         statusMessage = "Categorizing…"
         do {
-            try await applyCategorizer(engine)
-            show(.success, "Organized \(library.tracks.count) tracks into \(library.categories.count) categories.")
-        } catch {
-            if engine == .appleIntelligence {
-                do {
-                    try await applyCategorizer(.ruleBased)
-                    show(.info, "Apple Intelligence was unavailable, so Prism sorted by genre rules instead.")
-                } catch {
-                    show(.error, error.localizedDescription)
-                }
-            } else {
-                show(.error, error.localizedDescription)
+            let runner = try makeRunner()
+            let categories = try await NameCategorizer().categorize(
+                tracks: library.tracks,
+                runner: runner
+            ) { message in
+                self.statusMessage = message
             }
+            library.categories = categories
+            library.lastCategorized = Date()
+            LibraryStore.save(library)
+            selectedCategoryID = categories.first?.id
+            show(.success, "Organized \(library.tracks.count) tracks into \(categories.count) categories.")
+        } catch {
+            show(.error, error.localizedDescription)
         }
         isWorking = false
         statusMessage = ""
     }
 
-    private func applyCategorizer(_ engine: Engine) async throws {
-        let categorizer: Categorizer = engine == .appleIntelligence
-            ? AppleIntelligenceCategorizer()
-            : RuleBasedCategorizer()
-        let categories = try await categorizer.categorize(tracks: library.tracks) { message in
-            self.statusMessage = message
+    private func makeRunner() throws -> LLMRunner {
+        switch engine {
+        case .appleIntelligence:
+            return AppleIntelligenceRunner()
+        case .ollama:
+            guard !ollamaModel.isEmpty else { throw CategorizerError.ollamaNoModel }
+            return OllamaRunner(model: ollamaModel)
         }
-        library.categories = categories
-        library.lastCategorized = Date()
+    }
+
+    func refreshOllamaModels() async {
+        do {
+            let models = try await OllamaClient.shared.listModels()
+            availableOllamaModels = models
+            if ollamaModel.isEmpty || !models.contains(ollamaModel) {
+                ollamaModel = models.first ?? ""
+            }
+        } catch {
+            availableOllamaModels = []
+        }
+    }
+
+    // MARK: - Liked Songs
+
+    var likedTracks: [LibraryTrack] {
+        library.tracks.filter { $0.sources.contains(.saved) }
+    }
+
+    var ownedPlaylists: [StoredPlaylist] {
+        guard let userID = library.profile?.id else { return library.playlists }
+        return library.playlists.filter { $0.ownerID == userID }
+    }
+
+    func categoryName(for trackID: String) -> String? {
+        library.categories.first { $0.trackIDs.contains(trackID) }?.name
+    }
+
+    func removeFromLibrary(trackIDs: Set<String>) async {
+        guard !isWorking, !trackIDs.isEmpty else { return }
+        let ids = Array(trackIDs)
+        isWorking = true
+        banner = nil
+        statusMessage = "Removing \(ids.count) track\(ids.count == 1 ? "" : "s") from your library…"
+        do {
+            try await SpotifyClient.shared.removeSavedTracks(ids: ids)
+            applyLocalRemoval(of: trackIDs)
+            show(.success, "Removed \(ids.count) track\(ids.count == 1 ? "" : "s") from your library.")
+        } catch {
+            show(.error, error.localizedDescription)
+        }
+        isWorking = false
+        statusMessage = ""
+    }
+
+    func addToNewPlaylist(name: String, trackIDs: Set<String>, removeFromLiked: Bool) async {
+        guard !isWorking, !trackIDs.isEmpty else { return }
+        guard let userID = library.profile?.id else {
+            show(.error, "Connect your Spotify account first.")
+            return
+        }
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else {
+            show(.error, "Pick a name for the new playlist.")
+            return
+        }
+        let uris = trackIDs.compactMap { tracksByID[$0]?.uri }
+        guard !uris.isEmpty else { return }
+
+        isWorking = true
+        banner = nil
+        statusMessage = "Creating “\(trimmed)” in Spotify…"
+        do {
+            let playlistID = try await SpotifyClient.shared.createPlaylist(
+                name: trimmed,
+                description: "Created with Prism.",
+                isPublic: false
+            )
+            try await SpotifyClient.shared.addTracks(playlistID: playlistID, uris: uris)
+            library.playlists.append(
+                StoredPlaylist(id: playlistID, name: trimmed, ownerID: userID, trackIDs: Array(trackIDs))
+            )
+            if removeFromLiked {
+                try await SpotifyClient.shared.removeSavedTracks(ids: Array(trackIDs))
+                applyLocalRemoval(of: trackIDs)
+            }
+            LibraryStore.save(library)
+            let suffix = removeFromLiked ? " (and removed them from Liked Songs)" : ""
+            show(.success, "Added \(uris.count) track\(uris.count == 1 ? "" : "s") to “\(trimmed)”\(suffix).")
+        } catch {
+            show(.error, error.localizedDescription)
+        }
+        isWorking = false
+        statusMessage = ""
+    }
+
+    func addToExistingPlaylist(playlistID: String, trackIDs: Set<String>, removeFromLiked: Bool) async {
+        guard !isWorking, !trackIDs.isEmpty else { return }
+        let uris = trackIDs.compactMap { tracksByID[$0]?.uri }
+        guard !uris.isEmpty else { return }
+        let playlistName = library.playlists.first { $0.id == playlistID }?.name ?? "playlist"
+
+        isWorking = true
+        banner = nil
+        statusMessage = "Adding to “\(playlistName)”…"
+        do {
+            try await SpotifyClient.shared.addTracks(playlistID: playlistID, uris: uris)
+            if removeFromLiked {
+                try await SpotifyClient.shared.removeSavedTracks(ids: Array(trackIDs))
+                applyLocalRemoval(of: trackIDs)
+                LibraryStore.save(library)
+            }
+            let suffix = removeFromLiked ? " (and removed them from Liked Songs)" : ""
+            show(.success, "Added \(uris.count) track\(uris.count == 1 ? "" : "s") to “\(playlistName)”\(suffix).")
+        } catch {
+            show(.error, error.localizedDescription)
+        }
+        isWorking = false
+        statusMessage = ""
+    }
+
+    private func applyLocalRemoval(of trackIDs: Set<String>) {
+        var updated = library
+        for index in updated.tracks.indices where trackIDs.contains(updated.tracks[index].id) {
+            updated.tracks[index].sources.remove(.saved)
+        }
+        let droppedIDs = Set(updated.tracks.filter { $0.sources.isEmpty }.map(\.id))
+        updated.tracks.removeAll { droppedIDs.contains($0.id) }
+        if !droppedIDs.isEmpty {
+            for index in updated.categories.indices {
+                updated.categories[index].trackIDs.removeAll { droppedIDs.contains($0) }
+            }
+            updated.categories.removeAll { $0.trackIDs.isEmpty }
+        }
+        library = updated
         LibraryStore.save(library)
-        selectedCategoryID = categories.first?.id
     }
 
     func createPlaylist(for category: Category) async {
         guard !isWorking else { return }
-        guard let userID = library.profile?.id else {
+        guard library.profile != nil else {
             show(.error, "Connect your Spotify account first.")
             return
         }
@@ -216,7 +380,6 @@ final class AppModel {
         let uris = category.trackIDs.compactMap { tracksByID[$0]?.uri }
         do {
             let playlistID = try await SpotifyClient.shared.createPlaylist(
-                userID: userID,
                 name: "Prism · \(category.name)",
                 description: "Sorted by Prism from your Spotify library.",
                 isPublic: false

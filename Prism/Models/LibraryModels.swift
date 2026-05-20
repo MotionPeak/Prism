@@ -64,17 +64,76 @@ struct StoredProfile: Codable, Sendable {
     let imageURL: String?
 }
 
+// A playlist from the user's Spotify account, cached with its track IDs so
+// Prism can show its contents without re-fetching.
+struct StoredPlaylist: Codable, Sendable, Identifiable, Hashable {
+    let id: String
+    let name: String
+    let ownerID: String?
+    var trackIDs: [String]
+
+    init(id: String, name: String, ownerID: String?, trackIDs: [String]) {
+        self.id = id
+        self.name = name
+        self.ownerID = ownerID
+        self.trackIDs = trackIDs
+    }
+
+    // Tolerates caches written before `trackIDs` existed.
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        name = try container.decode(String.self, forKey: .name)
+        ownerID = try container.decodeIfPresent(String.self, forKey: .ownerID)
+        trackIDs = try container.decodeIfPresent([String].self, forKey: .trackIDs) ?? []
+    }
+}
+
 // The full cached state: profile, tracks, and the most recent categorization.
 struct PrismLibrary: Codable, Sendable {
     var profile: StoredProfile?
     var tracks: [LibraryTrack]
     var categories: [Category]
+    var playlists: [StoredPlaylist]
     var lastSynced: Date?
     var lastCategorized: Date?
 
-    static let empty = PrismLibrary(profile: nil, tracks: [], categories: [], lastSynced: nil, lastCategorized: nil)
+    static let empty = PrismLibrary(
+        profile: nil,
+        tracks: [],
+        categories: [],
+        playlists: [],
+        lastSynced: nil,
+        lastCategorized: nil
+    )
 
     var allGenres: [String] {
         Set(tracks.flatMap(\.genres)).sorted()
+    }
+
+    init(
+        profile: StoredProfile?,
+        tracks: [LibraryTrack],
+        categories: [Category],
+        playlists: [StoredPlaylist],
+        lastSynced: Date?,
+        lastCategorized: Date?
+    ) {
+        self.profile = profile
+        self.tracks = tracks
+        self.categories = categories
+        self.playlists = playlists
+        self.lastSynced = lastSynced
+        self.lastCategorized = lastCategorized
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        profile = try container.decodeIfPresent(StoredProfile.self, forKey: .profile)
+        tracks = try container.decode([LibraryTrack].self, forKey: .tracks)
+        categories = try container.decode([Category].self, forKey: .categories)
+        playlists = try container.decodeIfPresent([StoredPlaylist].self, forKey: .playlists) ?? []
+        lastSynced = try container.decodeIfPresent(Date.self, forKey: .lastSynced)
+        lastCategorized = try container.decodeIfPresent(Date.self, forKey: .lastCategorized)
     }
 }

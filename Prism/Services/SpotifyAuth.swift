@@ -42,6 +42,7 @@ final class SpotifyAuth {
 
     private let scopes = [
         "user-library-read",
+        "user-library-modify",
         "playlist-read-private",
         "playlist-read-collaborative",
         "user-top-read",
@@ -49,10 +50,15 @@ final class SpotifyAuth {
         "user-follow-read",
         "playlist-modify-private",
         "playlist-modify-public",
+        "streaming",
+        "user-read-email",
+        "user-read-private",
+        "user-modify-playback-state",
     ]
 
     private let clientIDKey = "spotifyClientID"
     private let tokenAccount = "refreshToken"
+    private let grantedScopesKey = "spotifyGrantedScopes"
 
     private var accessToken: String?
     private var refreshToken: String?
@@ -70,6 +76,16 @@ final class SpotifyAuth {
     }
 
     var isAuthorized: Bool { refreshToken != nil }
+
+    // The scope string Spotify actually granted at the last authorization.
+    var grantedScopes: String { UserDefaults.standard.string(forKey: grantedScopesKey) ?? "" }
+
+    // Write scopes Prism needs for creating playlists and editing the library.
+    var missingWriteScopes: [String] {
+        let granted = Set(grantedScopes.split(separator: " ").map(String.init))
+        return ["playlist-modify-private", "playlist-modify-public", "user-library-modify"]
+            .filter { !granted.contains($0) }
+    }
 
     private init() {
         refreshToken = Keychain.get(tokenAccount)
@@ -163,6 +179,7 @@ final class SpotifyAuth {
         refreshToken = nil
         expiresAt = nil
         Keychain.delete(tokenAccount)
+        UserDefaults.standard.removeObject(forKey: grantedScopesKey)
     }
 
     private func exchangeCode(_ code: String, verifier: String, clientID: String) async throws {
@@ -211,6 +228,9 @@ final class SpotifyAuth {
         if let newRefresh = token.refreshToken {
             refreshToken = newRefresh
             Keychain.set(newRefresh, account: tokenAccount)
+        }
+        if let scope = token.scope {
+            UserDefaults.standard.set(scope, forKey: grantedScopesKey)
         }
     }
 

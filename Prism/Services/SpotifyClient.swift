@@ -65,7 +65,8 @@ final class SpotifyClient {
                 throw SpotifyError.rateLimited
             default:
                 let body = String(data: data, encoding: .utf8) ?? ""
-                throw SpotifyError.http(http.statusCode, String(body.prefix(200)))
+                let path = url.path
+                throw SpotifyError.http(http.statusCode, "\(path) — \(String(body.prefix(200)))")
             }
         }
     }
@@ -115,7 +116,7 @@ final class SpotifyClient {
 
     func playlistTracks(playlistID: String) async throws -> [SPTrack] {
         let items: [SPPlaylistTrackItem] = try await allPages(
-            "/playlists/\(playlistID)/tracks",
+            "/playlists/\(playlistID)/items",
             query: [URLQueryItem(name: "limit", value: "100")]
         )
         return items.compactMap(\.track)
@@ -170,8 +171,8 @@ final class SpotifyClient {
 
     // MARK: - Writing playlists
 
-    func createPlaylist(userID: String, name: String, description: String, isPublic: Bool) async throws -> String {
-        let url = URL(string: "\(base)/users/\(userID)/playlists")!
+    func createPlaylist(name: String, description: String, isPublic: Bool) async throws -> String {
+        let url = URL(string: "\(base)/me/playlists")!
         let data = try await fetch(url, method: "POST", jsonBody: [
             "name": name,
             "description": description,
@@ -182,9 +183,33 @@ final class SpotifyClient {
     }
 
     func addTracks(playlistID: String, uris: [String]) async throws {
-        let url = URL(string: "\(base)/playlists/\(playlistID)/tracks")!
+        let url = URL(string: "\(base)/playlists/\(playlistID)/items")!
         for batch in uris.chunked(into: 100) where !batch.isEmpty {
             _ = try await fetch(url, method: "POST", jsonBody: ["uris": batch])
         }
+    }
+
+    // The Feb 2026 API removes library items via /me/library, taking the
+    // Spotify URIs as a comma-separated query parameter (max 40 per call).
+    func removeSavedTracks(ids: [String]) async throws {
+        let uris = ids.map { "spotify:track:\($0)" }
+        for batch in uris.chunked(into: 40) where !batch.isEmpty {
+            var components = URLComponents(string: "\(base)/me/library")!
+            components.queryItems = [URLQueryItem(name: "uris", value: batch.joined(separator: ","))]
+            _ = try await fetch(components.url!, method: "DELETE")
+        }
+    }
+
+    // MARK: - Playback
+
+    // Starts a track on a specific device — used to play through the
+    // Web Playback SDK's device.
+    func startPlayback(deviceID: String, uris: [String], offsetPosition: Int) async throws {
+        var components = URLComponents(string: "\(base)/me/player/play")!
+        components.queryItems = [URLQueryItem(name: "device_id", value: deviceID)]
+        _ = try await fetch(components.url!, method: "PUT", jsonBody: [
+            "uris": uris,
+            "offset": ["position": offsetPosition],
+        ])
     }
 }

@@ -11,6 +11,9 @@ struct SidebarView: View {
                     profileRow(profile)
                 }
             }
+            Section("Library") {
+                likedSongsRow.tag(AppModel.likedSongsID)
+            }
             Section("Categories") {
                 if model.library.categories.isEmpty {
                     Text("No categories yet. Sync to get started.")
@@ -20,6 +23,14 @@ struct SidebarView: View {
                     ForEach(model.library.categories) { category in
                         categoryRow(category)
                             .tag(category.id)
+                    }
+                }
+            }
+            if !model.library.playlists.isEmpty {
+                Section("Playlists") {
+                    ForEach(model.library.playlists) { playlist in
+                        playlistRow(playlist)
+                            .tag(AppModel.playlistTag(playlist.id))
                     }
                 }
             }
@@ -61,6 +72,24 @@ struct SidebarView: View {
         .clipShape(Circle())
     }
 
+    private var likedSongsRow: some View {
+        HStack(spacing: 10) {
+            Image(systemName: "heart.fill")
+                .font(.title3)
+                .foregroundStyle(.pink)
+            VStack(alignment: .leading, spacing: 1) {
+                Text("Liked Songs")
+                    .font(.body)
+                    .lineLimit(1)
+                Text("\(model.likedTracks.count) tracks")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(.vertical, 2)
+    }
+
     private func categoryRow(_ category: Category) -> some View {
         HStack(spacing: 10) {
             Text(category.emoji)
@@ -70,6 +99,24 @@ struct SidebarView: View {
                     .font(.body)
                     .lineLimit(1)
                 Text("\(category.trackIDs.count) tracks")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(.vertical, 2)
+    }
+
+    private func playlistRow(_ playlist: StoredPlaylist) -> some View {
+        HStack(spacing: 10) {
+            Image(systemName: "music.note.list")
+                .font(.title3)
+                .foregroundStyle(.secondary)
+            VStack(alignment: .leading, spacing: 1) {
+                Text(playlist.name)
+                    .font(.body)
+                    .lineLimit(1)
+                Text("\(playlist.trackIDs.count) tracks")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

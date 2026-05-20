@@ -15,6 +15,7 @@ struct ContentView: View {
 
 struct LibraryView: View {
     @Environment(AppModel.self) private var model
+    @Environment(WebPlaybackController.self) private var player
 
     var body: some View {
         NavigationSplitView {
@@ -34,9 +35,18 @@ struct LibraryView: View {
                 .help("Pull the latest from Spotify and re-sort everything")
             }
         }
+        .safeAreaInset(edge: .bottom) {
+            if player.isActive || !player.statusMessage.isEmpty {
+                PlayerBar()
+            }
+        }
         .overlay(alignment: .top) {
             StatusOverlay()
                 .padding(12)
+        }
+        .background {
+            WebPlaybackHostView()
+                .frame(width: 1, height: 1)
         }
     }
 }

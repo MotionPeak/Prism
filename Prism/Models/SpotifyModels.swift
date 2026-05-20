@@ -76,6 +76,11 @@ struct SPSavedTrack: Decodable, Sendable {
 
 struct SPPlaylistTrackItem: Decodable, Sendable {
     let track: SPTrack?
+
+    // The Feb 2026 API renamed the playlist item's "track" field to "item".
+    enum CodingKeys: String, CodingKey {
+        case track = "item"
+    }
 }
 
 struct SPRecentlyPlayedItem: Decodable, Sendable {
@@ -129,10 +134,12 @@ struct SPTokenResponse: Decodable, Sendable {
     let accessToken: String
     let expiresIn: Int
     let refreshToken: String?
+    let scope: String?
 
     enum CodingKeys: String, CodingKey {
         case accessToken = "access_token"
         case expiresIn = "expires_in"
         case refreshToken = "refresh_token"
+        case scope
     }
 }

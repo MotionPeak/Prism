@@ -17,12 +17,20 @@ enum LibraryStore {
         let playlists = try await client.playlists()
 
         var collected: [(track: SPTrack, source: TrackSource)] = saved.map { ($0, .saved) }
+        var playlistTrackIDs: [String: [String]] = [:]
 
         for (index, playlist) in playlists.enumerated() {
             let fraction = 0.22 + 0.34 * Double(index) / Double(max(playlists.count, 1))
             progress("Reading “\(playlist.name)”…", fraction)
-            let tracks = try await client.playlistTracks(playlistID: playlist.id)
-            collected.append(contentsOf: tracks.map { ($0, .playlist) })
+            do {
+                let tracks = try await client.playlistTracks(playlistID: playlist.id)
+                collected.append(contentsOf: tracks.map { ($0, .playlist) })
+                playlistTrackIDs[playlist.id] = tracks.compactMap(\.id)
+            } catch SpotifyError.http(403, _) {
+                // Spotify only returns contents for playlists the user owns or
+                // collaborates on; followed playlists are skipped.
+                print("Prism: skipping playlist “\(playlist.name)” (\(playlist.id)) — 403 Forbidden")
+            }
         }
 
         progress("Fetching your top tracks…", 0.58)
@@ -48,16 +56,21 @@ enum LibraryStore {
             }
         }
 
-        // Genres live on the artist, not the track — resolve them in one pass.
+        // Genres live on the artist, not the track. Spotify gates the /artists
+        // endpoint for development-mode apps, so this often resolves nothing —
+        // that's fine, categorization is name-based and does not need genres.
         progress("Resolving genres…", 0.78)
         let artistIDs = Array(Set(byID.values.flatMap(\.artistIDs)))
-        let artists = try await client.artists(ids: artistIDs)
         var genresByArtist: [String: [String]] = [:]
-        for artist in artists {
-            if let id = artist.id { genresByArtist[id] = artist.genres ?? [] }
+        do {
+            let artists = try await client.artists(ids: artistIDs)
+            for artist in artists {
+                if let id = artist.id { genresByArtist[id] = artist.genres ?? [] }
+            }
+        } catch SpotifyError.http(403, _) {
+            print("Prism: /artists is restricted for this app — genres left empty.")
         }
 
-        progress("Finalizing your library…", 0.94)
         var tracks: [LibraryTrack] = []
         for var track in byID.values {
             let genres = track.artistIDs.flatMap { genresByArtist[$0] ?? [] }
@@ -66,7 +79,17 @@ enum LibraryStore {
         }
         tracks.sort { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
 
+        progress("Finalizing your library…", 0.94)
+
         progress("Done", 1.0)
+        let storedPlaylists = playlists.map {
+            StoredPlaylist(
+                id: $0.id,
+                name: $0.name,
+                ownerID: $0.owner?.id,
+                trackIDs: playlistTrackIDs[$0.id] ?? []
+            )
+        }
         return PrismLibrary(
             profile: StoredProfile(
                 id: user.id,
@@ -75,6 +98,7 @@ enum LibraryStore {
             ),
             tracks: tracks,
             categories: [],
+            playlists: storedPlaylists,
             lastSynced: Date(),
             lastCategorized: nil
         )
