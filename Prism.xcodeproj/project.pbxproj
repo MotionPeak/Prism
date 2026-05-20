@@ -1,0 +1,454 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		09C1ECDD1D2ACF19DC228C32 /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EDF74CFB52AF103578E652 /* ConnectView.swift */; };
+		0E19CE58067EB96AB418CA9C /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53963D1FFC85EDB7FB0C7B80 /* AppModel.swift */; };
+		15F9ACEF77302709DDE3EAFF /* AppleIntelligenceCategorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFB07812FBD20BC42872C47 /* AppleIntelligenceCategorizer.swift */; };
+		1B0F942FEB9A3A0E82B3515F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE204BBB29A426CE01E42EB9 /* SettingsView.swift */; };
+		1F5FB135D808FA276DDCB9D8 /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DAF4E7D8994992B8BD421D /* Exporter.swift */; };
+		2068E29451F82E8DD5AFA620 /* PrismTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F020D16EC09F9C2017682 /* PrismTheme.swift */; };
+		208E109E2EF75AA208AF2176 /* PrismApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B8078AD319F7386EE02C62 /* PrismApp.swift */; };
+		56D251D45DE04D29A2EA522A /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3A72D801E642CC94FADFD /* SidebarView.swift */; };
+		6A862818C00C334244A6201A /* LibraryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57408DEA5B078B18CC43B8E7 /* LibraryModels.swift */; };
+		74B3E2DD3510B49D4F4A0611 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 797614D7F2C2EB4869DFFE9C /* Assets.xcassets */; };
+		776381A8FA528850458D9F29 /* TrackRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB35C65A2B207D9D1EF13C /* TrackRowView.swift */; };
+		82216FB3953D68779ADF8357 /* SpotifyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A51534F0E6D6DB9AEB2D46 /* SpotifyModels.swift */; };
+		82A2C86FE0C3287BCD89894F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE5234E3DE522DA09B70D39 /* Extensions.swift */; };
+		8CD881F22946AAA45C6A9B49 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5686DE671DA2DD3D3A5F27 /* Keychain.swift */; };
+		9C4439726CC804BDCF841B47 /* CategoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C2D309A671F6615C2E6640 /* CategoryDetailView.swift */; };
+		A0723FA54AECC3E6903F0ABE /* Categorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84B37BB72A68D4EE1FE8FD2 /* Categorizer.swift */; };
+		A421948F7525DF2944B8503C /* LibraryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC7BC9CBD54A83C01B9A459 /* LibraryStore.swift */; };
+		BC67B3494E94F92A1F64ED8B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F58B8466004B36C8015006A /* ContentView.swift */; };
+		E6AB8CEA5B4B9305E0385748 /* SpotifyAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABB2675D0EA1039ADD84398 /* SpotifyAuth.swift */; };
+		EACC7594B6E83FCD8CF1FDAA /* LoopbackServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C19D83F46CEDA98A480C12 /* LoopbackServer.swift */; };
+		EF9AA727ED75F5BF18543E61 /* SpotifyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96C32F34753CEC0DFAAC99B /* SpotifyClient.swift */; };
+		F533BAF9EDA889BD03FF398F /* RuleBasedCategorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202E94D2EB6614BF43616C36 /* RuleBasedCategorizer.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		03DAF4E7D8994992B8BD421D /* Exporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
+		202E94D2EB6614BF43616C36 /* RuleBasedCategorizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleBasedCategorizer.swift; sourceTree = "<group>"; };
+		252C661D418B9BABEE39F94D /* project.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = project.yml; sourceTree = "<group>"; };
+		26B8078AD319F7386EE02C62 /* PrismApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismApp.swift; sourceTree = "<group>"; };
+		2FFB07812FBD20BC42872C47 /* AppleIntelligenceCategorizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleIntelligenceCategorizer.swift; sourceTree = "<group>"; };
+		3CBECDC40DB2F7D8BF88B956 /* Prism.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prism.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		40C19D83F46CEDA98A480C12 /* LoopbackServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopbackServer.swift; sourceTree = "<group>"; };
+		4ABB2675D0EA1039ADD84398 /* SpotifyAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuth.swift; sourceTree = "<group>"; };
+		53963D1FFC85EDB7FB0C7B80 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		57408DEA5B078B18CC43B8E7 /* LibraryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryModels.swift; sourceTree = "<group>"; };
+		5A5686DE671DA2DD3D3A5F27 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		797614D7F2C2EB4869DFFE9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		94A51534F0E6D6DB9AEB2D46 /* SpotifyModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyModels.swift; sourceTree = "<group>"; };
+		9EE5234E3DE522DA09B70D39 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		9F58B8466004B36C8015006A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A5F3A72D801E642CC94FADFD /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		AE204BBB29A426CE01E42EB9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		BEC7BC9CBD54A83C01B9A459 /* LibraryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryStore.swift; sourceTree = "<group>"; };
+		C4C2D309A671F6615C2E6640 /* CategoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailView.swift; sourceTree = "<group>"; };
+		C7EDF74CFB52AF103578E652 /* ConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectView.swift; sourceTree = "<group>"; };
+		C96C32F34753CEC0DFAAC99B /* SpotifyClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyClient.swift; sourceTree = "<group>"; };
+		D84B37BB72A68D4EE1FE8FD2 /* Categorizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categorizer.swift; sourceTree = "<group>"; };
+		EB712E4F2C4CE997633EE3DF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F1EB35C65A2B207D9D1EF13C /* TrackRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRowView.swift; sourceTree = "<group>"; };
+		F31F020D16EC09F9C2017682 /* PrismTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismTheme.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		081163646A4A620D92B0DCA2 = {
+			isa = PBXGroup;
+			children = (
+				8C82A9A9E1294F24F80AF4F6 /* Prism */,
+				252C661D418B9BABEE39F94D /* project.yml */,
+				EB712E4F2C4CE997633EE3DF /* README.md */,
+				82EA743558BFD02527A88470 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		267AD0BCAF191AE43BBE0D17 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				9EE5234E3DE522DA09B70D39 /* Extensions.swift */,
+				5A5686DE671DA2DD3D3A5F27 /* Keychain.swift */,
+				BEC7BC9CBD54A83C01B9A459 /* LibraryStore.swift */,
+				40C19D83F46CEDA98A480C12 /* LoopbackServer.swift */,
+				4ABB2675D0EA1039ADD84398 /* SpotifyAuth.swift */,
+				C96C32F34753CEC0DFAAC99B /* SpotifyClient.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		3E8BC80BCE780358B2E780C1 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				53963D1FFC85EDB7FB0C7B80 /* AppModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		5A3BAEF16E19B82DA862B696 /* Export */ = {
+			isa = PBXGroup;
+			children = (
+				03DAF4E7D8994992B8BD421D /* Exporter.swift */,
+			);
+			path = Export;
+			sourceTree = "<group>";
+		};
+		6EC02F4BC21860D90CBF3ADF /* Categorization */ = {
+			isa = PBXGroup;
+			children = (
+				2FFB07812FBD20BC42872C47 /* AppleIntelligenceCategorizer.swift */,
+				D84B37BB72A68D4EE1FE8FD2 /* Categorizer.swift */,
+				202E94D2EB6614BF43616C36 /* RuleBasedCategorizer.swift */,
+			);
+			path = Categorization;
+			sourceTree = "<group>";
+		};
+		82EA743558BFD02527A88470 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3CBECDC40DB2F7D8BF88B956 /* Prism.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8C82A9A9E1294F24F80AF4F6 /* Prism */ = {
+			isa = PBXGroup;
+			children = (
+				6EC02F4BC21860D90CBF3ADF /* Categorization */,
+				5A3BAEF16E19B82DA862B696 /* Export */,
+				FAEB5DB5CD24B173A5C2D359 /* Models */,
+				267AD0BCAF191AE43BBE0D17 /* Services */,
+				3E8BC80BCE780358B2E780C1 /* ViewModels */,
+				FDDD2319C18B03CA3673D4CC /* Views */,
+				797614D7F2C2EB4869DFFE9C /* Assets.xcassets */,
+				26B8078AD319F7386EE02C62 /* PrismApp.swift */,
+			);
+			path = Prism;
+			sourceTree = "<group>";
+		};
+		FAEB5DB5CD24B173A5C2D359 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				57408DEA5B078B18CC43B8E7 /* LibraryModels.swift */,
+				94A51534F0E6D6DB9AEB2D46 /* SpotifyModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FDDD2319C18B03CA3673D4CC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C4C2D309A671F6615C2E6640 /* CategoryDetailView.swift */,
+				C7EDF74CFB52AF103578E652 /* ConnectView.swift */,
+				9F58B8466004B36C8015006A /* ContentView.swift */,
+				F31F020D16EC09F9C2017682 /* PrismTheme.swift */,
+				AE204BBB29A426CE01E42EB9 /* SettingsView.swift */,
+				A5F3A72D801E642CC94FADFD /* SidebarView.swift */,
+				F1EB35C65A2B207D9D1EF13C /* TrackRowView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CDFC0F00FA9F3945D4407FE1 /* Prism */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C25105F88BA2397C1CC00D97 /* Build configuration list for PBXNativeTarget "Prism" */;
+			buildPhases = (
+				7560C300E64021D8BADEC8B6 /* Sources */,
+				3E3DEC94F2D9C4F6FCCD8F48 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Prism;
+			packageProductDependencies = (
+			);
+			productName = Prism;
+			productReference = 3CBECDC40DB2F7D8BF88B956 /* Prism.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F89E62DC5A2CEA3C9FF3EC43 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					CDFC0F00FA9F3945D4407FE1 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 0DA5A059EA94E37BB1AE7D8F /* Build configuration list for PBXProject "Prism" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 081163646A4A620D92B0DCA2;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 82EA743558BFD02527A88470 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CDFC0F00FA9F3945D4407FE1 /* Prism */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3E3DEC94F2D9C4F6FCCD8F48 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74B3E2DD3510B49D4F4A0611 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7560C300E64021D8BADEC8B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E19CE58067EB96AB418CA9C /* AppModel.swift in Sources */,
+				15F9ACEF77302709DDE3EAFF /* AppleIntelligenceCategorizer.swift in Sources */,
+				A0723FA54AECC3E6903F0ABE /* Categorizer.swift in Sources */,
+				9C4439726CC804BDCF841B47 /* CategoryDetailView.swift in Sources */,
+				09C1ECDD1D2ACF19DC228C32 /* ConnectView.swift in Sources */,
+				BC67B3494E94F92A1F64ED8B /* ContentView.swift in Sources */,
+				1F5FB135D808FA276DDCB9D8 /* Exporter.swift in Sources */,
+				82A2C86FE0C3287BCD89894F /* Extensions.swift in Sources */,
+				8CD881F22946AAA45C6A9B49 /* Keychain.swift in Sources */,
+				6A862818C00C334244A6201A /* LibraryModels.swift in Sources */,
+				A421948F7525DF2944B8503C /* LibraryStore.swift in Sources */,
+				EACC7594B6E83FCD8CF1FDAA /* LoopbackServer.swift in Sources */,
+				208E109E2EF75AA208AF2176 /* PrismApp.swift in Sources */,
+				2068E29451F82E8DD5AFA620 /* PrismTheme.swift in Sources */,
+				F533BAF9EDA889BD03FF398F /* RuleBasedCategorizer.swift in Sources */,
+				1B0F942FEB9A3A0E82B3515F /* SettingsView.swift in Sources */,
+				56D251D45DE04D29A2EA522A /* SidebarView.swift in Sources */,
+				E6AB8CEA5B4B9305E0385748 /* SpotifyAuth.swift in Sources */,
+				EF9AA727ED75F5BF18543E61 /* SpotifyClient.swift in Sources */,
+				82216FB3953D68779ADF8357 /* SpotifyModels.swift in Sources */,
+				776381A8FA528850458D9F29 /* TrackRowView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4E8AB6C50D8E6B5B2BBD9220 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Prism/Prism.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Prism/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.motionpeak.prism;
+				PRODUCT_NAME = Prism;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		982D6354F7A0E5E91097D64D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F77B2C4C002B81D994EADF5F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		FD67B5E1F87349514CB2796D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Prism/Prism.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Prism/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.motionpeak.prism;
+				PRODUCT_NAME = Prism;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0DA5A059EA94E37BB1AE7D8F /* Build configuration list for PBXProject "Prism" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				982D6354F7A0E5E91097D64D /* Debug */,
+				F77B2C4C002B81D994EADF5F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C25105F88BA2397C1CC00D97 /* Build configuration list for PBXNativeTarget "Prism" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD67B5E1F87349514CB2796D /* Debug */,
+				4E8AB6C50D8E6B5B2BBD9220 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F89E62DC5A2CEA3C9FF3EC43 /* Project object */;
+}
