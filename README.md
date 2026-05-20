@@ -9,6 +9,17 @@ every track into clear categories by classifying its artist with a language mode
 running entirely on your Mac. You can browse the result, play tracks in-app, push a
 category back to Spotify as a playlist, or export it to CSV.
 
+## Download
+
+**[⬇ Download the latest release](https://github.com/MotionPeak/Prism/releases/latest)**
+
+Open the downloaded `.dmg` and drag **Prism** into your **Applications** folder.
+The app is signed with a Developer ID and notarized by Apple, so it launches with
+no Gatekeeper warnings.
+
+Requires macOS 26 on an Apple Silicon Mac. On first launch you paste a free
+Spotify Client ID — see **Setup** below (about two minutes).
+
 ## Features
 
 - Syncs liked songs, all playlists, top tracks, recently played, and followed artists
